@@ -9,7 +9,7 @@
     height: 14px;
     width: 14px;
     float: left;
-    position: absolute;
+	margin: 2px;
     -webkit-border-radius: 2px;
 	-moz-border-radius: 2px;
 	border-radius: 2px;

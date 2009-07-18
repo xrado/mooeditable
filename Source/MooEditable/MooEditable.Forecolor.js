@@ -30,44 +30,36 @@ MooEditable.Actions.forecolor = {
 	type: 'button-overlay',
 	title: 'Change Color',
 	options: {
-		overlaySize: {x:'148px', y:'94px'},
+		overlaySize: {x:'auto', y:'auto'},
 		overlayHTML: (function(){
-			var html = '';
-			var colors = [['000000', '993300', '333300', '003300', '003366', '000077', '333399', '333333'], ['770000', 'ff6600', '777700', '007700', '007777', '0000ff', '666699', '777777'], ['ff0000', 'ff9900', '99cc00', '339966', '33cccc', '3366f0', '770077', '999999'], ['ff00ff', 'ffcc00', 'ffff00', '00ff00', '00ffff', '00ccff', '993366', 'cccccc'], ['ff99cc', 'ffcc99', 'ffff99', 'ccffcc', 'ccffff', '99ccff', 'cc9977', 'ffffff']];
-						
-			var j = x = y = 0;
+			var html = new Element('div');
+			var colors = [
+				['000000', '993300', '333300', '003300', '003366', '000077', '333399', '333333'], 
+				['770000', 'ff6600', '777700', '007700', '007777', '0000ff', '666699', '777777'], 
+				['ff0000', 'ff9900', '99cc00', '339966', '33cccc', '3366f0', '770077', '999999'], 
+				['ff00ff', 'ffcc00', 'ffff00', '00ff00', '00ffff', '00ccff', '993366', 'cccccc'], 
+				['ff99cc', 'ffcc99', 'ffff99', 'ccffcc', 'ccffff', '99ccff', 'cc9977', 'ffffff']
+			];		
 			$each(colors, function(row){
 				$each(row, function(c){
-					var top = "top:" + (x * 18 + 4) + "px;";
-					var left = "left:" + (j * 18 + 4) + "px;";
-					var bg = "background-color:#" + c;
-							            
-					html+= '<a href="javascript:void(0)" class="colorPickerColor" style="';
-					html+= top;
-					html+= left;
-					html+= bg;
-					html+= '"></a>'; 
-
-					j++;
+					new Element('a',{
+						'class' : 'colorPickerColor',
+						'styles' : { 'background-color' : '#'+c }
+					}).inject(html,'bottom');
 	            },self);
-	            x++;
-	            if (y < j)
-		            y = j;
-	            j = 0;
+				new Element('br',{styles:{'clear':'both'}}).inject(html,'bottom');
 	        },self);
-			return html;
+			return html.get('html');
 		})()
 	},
 	
 	command: function(buttonOverlay, e){
-		var el = e.target;
-		if (el.tagName.toLowerCase() != 'a') return;
-		
-		var color = $(el).getStyle('background-color');
-		
-		//buttonOverlay.el.setStyle('background-color', color);
+		var el = $( e.target || e.srcElement);
+		if (el.get('tag') != 'a') return;
+		var color = el.getStyle('background-color');
 		this.execute('forecolor', false, color);
 		this.focus();
 	}
+	
 };
 
