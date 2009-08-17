@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<title>MooEditable</title>
+<style>
+body {
+	color: #000;
+	background-color: #fff;
+	font-family: helvetica, arial, sans-serif;
+	font-size: 80%;
+	text-align: center;
+}
+#container{
+	margin: 0 auto;
+	width: 700px;
+	text-align: left;
+}
+.download{
+	float: right;
+}
+h1 a{
+	color: #000;
+	background-color: transparent;
+	text-decoration: none;
+	border-bottom: 2px solid #fafafa;
+}
+h1 a:hover{
+	border-color: #000;
+}
+pre{
+	color: #fff;
+	background-color: #000;
+	padding: 10px;
+	font-size: 110%;
+}
+.mooeditable{
+	border: 2px solid #ddd;
+}
+#textarea-1{
+	width: 670px;
+	height: 100px;
+	padding: 10px;
+}
+</style>
+<link rel="stylesheet" href="http://github.com/cheeaun/mooeditable/raw/master/Assets/MooEditable/MooEditable.css">
+<script src="http://ajax.googleapis.com/ajax/libs/mootools/1.2.3/mootools-yui-compressed.js"></script>
+<script src="http://github.com/cheeaun/mooeditable/raw/master/Source/MooEditable/MooEditable.js"></script>
+<script>
+	window.addEvent('domready', function(){
+		$('textarea-1').mooEditable();
+	});
+</script>
+
+<a href="http://github.com/cheeaun/mooeditable"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+
+<div id="container">
+
+	<div class="download">
+	<a href="http://github.com/cheeaun/mooeditable/zipball/master">
+	<img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
+	<a href="http://github.com/cheeaun/mooeditable/tarball/master">
+	<img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+	</div>
+
+	<h1><a href="http://github.com/cheeaun/mooeditable">MooEditable</a> 
+	<small>by <a href="http://github.com/cheeaun">cheeaun</a></small></h1>
+
+	<p class="description">A simple web-based WYSIWYG editor, written in <a href="http://mootools.net/">MooTools</a>.</p>
+	
+	<h2>Demo</h2>
+	<textarea class="mooeditable" id="textarea-1" name="editable1">
+		&lt;p&gt;&lt;strong&gt;This&lt;/strong&gt; is cool!&lt;/p&gt;
+	</textarea>
+
+	<h2>Download</h2>
+	<p>You can download this project in either
+	<a href="http://github.com/cheeaun/mooeditable/zipball/master">zip</a> or
+	<a href="http://github.com/cheeaun/mooeditable/tarball/master">tar</a> formats.
+	</p>
+	<p>You can also clone the project with <a href="http://git-scm.com">Git</a> by running:
+	<pre>$ git clone git://github.com/cheeaun/mooeditable</pre>
+	</p>
+
+	<h2>Source Code</h2>
+	<p><a href="http://github.com/cheeaun/mooeditable">http://github.com/cheeaun/mooeditable</a></p>
+
+	<h2>Discussion</h2>
+	<p><a href="http://groups.google.com/group/mooeditable">http://groups.google.com/group/mooeditable</a></p>
+	
+	<h2>Issue Tracker</h2>
+	<p><a href="http://cheeaun.lighthouseapp.com/projects/25080-mooeditable">http://cheeaun.lighthouseapp.com/projects/25080-mooeditable</a></p>
+
+</div>
+</body>
+</html>
