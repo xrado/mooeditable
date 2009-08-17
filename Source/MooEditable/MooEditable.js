@@ -36,10 +36,10 @@ var MooEditable = new Class({
 		actions: 'bold italic underline strikethrough | insertunorderedlist insertorderedlist indent outdent | undo redo | createlink unlink | urlimage | toggleview',
 		handleSubmit: true,
 		handleLabel: true,
-		baseCSS: 'html{ height: 100%; cursor: text } body{ font-family: sans-serif; border: 0; }',
+		baseCSS: 'html{ height: 100%; cursor: text; } body{ font-family: sans-serif; }',
 		extraCSS: '',
 		externalCSS: '',
-		html: '<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>{BASECSS} {EXTRACSS}</style>{EXTERNALCSS}</head><body>{CONTENT}</body></html>'
+		html: '<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style>{BASECSS} {EXTRACSS}</style>{EXTERNALCSS}</head><body>{CONTENT}</body></html>'
 	},
 
 	initialize: function(el, options){
@@ -98,6 +98,8 @@ var MooEditable = new Class({
 		// Build the iframe
 		this.iframe = new IFrame({
 			'class': 'mooeditable-iframe',
+			frameBorder: 0,
+			src: 'javascript:""', // Workaround for HTTPs warning in IE6/7
 			styles: {
 				height: dimensions.y
 			}
@@ -249,7 +251,7 @@ var MooEditable = new Class({
 		
 		if (this.options.toolbar) this.checkStates();
 		
-		this.fireEvent('editorMouseUp', e);
+		this.fireEvent('editorMouseUp', [e, this]);
 	},
 	
 	editorMouseDown: function(e){
@@ -258,7 +260,7 @@ var MooEditable = new Class({
 			return;
 		}
 		
-		this.fireEvent('editorMouseDown', e);
+		this.fireEvent('editorMouseDown', [e, this]);
 	},
 	
 	editorContextMenu: function(e){
@@ -267,7 +269,7 @@ var MooEditable = new Class({
 			return;
 		}
 		
-		this.fireEvent('editorContextMenu', e);
+		this.fireEvent('editorContextMenu', [e, this]);
 	},
 	
 	editorClick: function(e){
@@ -279,11 +281,11 @@ var MooEditable = new Class({
 			}
 		}
 		
-		this.fireEvent('editorClick', e);
+		this.fireEvent('editorClick', [e, this]);
 	},
 	
 	editorDoubleClick: function(e){
-		this.fireEvent('editorDoubleClick', e);
+		this.fireEvent('editorDoubleClick', [e, this]);
 	},
 	
 	editorKeyPress: function(e){
@@ -294,7 +296,7 @@ var MooEditable = new Class({
 		
 		this.keyListener(e);
 		
-		this.fireEvent('editorKeyPress', e);
+		this.fireEvent('editorKeyPress', [e, this]);
 	},
 	
 	editorKeyUp: function(e){
@@ -305,7 +307,7 @@ var MooEditable = new Class({
 		
 		if (this.options.toolbar) this.checkStates();
 		
-		this.fireEvent('editorKeyUp', e);
+		this.fireEvent('editorKeyUp', [e, this]);
 	},
 	
 	editorKeyDown: function(e){
@@ -364,7 +366,7 @@ var MooEditable = new Class({
 			}
 		}
 		
-		this.fireEvent('editorKeyDown', e);
+		this.fireEvent('editorKeyDown', [e, this]);
 	},
 	
 	keyListener: function(e){
@@ -376,11 +378,8 @@ var MooEditable = new Class({
 	},
 
 	focus: function(){
-		// needs the delay to get focus working
-		(function(){ 
-			(this.mode == 'iframe' ? this.win : this.textarea).focus();
-			this.fireEvent('focus', this);
-		}).delay(10, this);
+		(this.mode == 'iframe' ? this.win : this.textarea).focus();
+		this.fireEvent('focus', this);
 		return this;
 	},
 
@@ -418,7 +417,7 @@ var MooEditable = new Class({
 			this.iframe.setStyle('display', 'none');
 		}
 		this.fireEvent('toggleView', this);
-		this.focus();
+		this.focus.delay(10, this);
 		return this;
 	},
 
@@ -694,8 +693,8 @@ MooEditable.Selection = new Class({
 	getText : function(){
 		var r = this.getRange();
 		var s = this.getSelection();
-
-		return this.isCollapsed() ? '' : r.text || s.toString();
+		
+		return this.isCollapsed() ? '' : r.text || (s.toString ? s.toString() : '');
 	},
 
 	getNode: function(){
@@ -1176,6 +1175,8 @@ MooEditable.Actions = new Hash({
 	}
 
 });
+
+MooEditable.Actions.Settings = {};
 
 Element.Properties.mooeditable = {
 

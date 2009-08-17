@@ -1,6 +1,6 @@
 /*
 Script: MooEditable.UI.Smiley.js
-	UI Class to create smiley images from a dropdown.
+	Extends MooEditable to insert smiley/emoticons.
 	You may want to change the path of absolute path of the images
 
 Usage:
@@ -25,22 +25,23 @@ Author:
     Olivier Refalo orefalo@yahoo.com
 */
 
+MooEditable.Actions.Settings.smiley = {
+	imagesPath: '../../Assets/MooEditable/Smiley/',
+	smileys: ['angryface', 'blush', 'gasp', 'grin', 'halo', 'lipsaresealed', 'smile', 'undecided', 'wink'],
+	fileExt: '.png'
+};
+
 MooEditable.Actions.smiley = {
-	
 	type: 'button-overlay',
-	title: 'Pick a Smiley!',
+	title: 'Insert Smiley',
 	options: {
-		overlaySize: {x:'auto', y:'auto'},
+		overlaySize: {x: 'auto'},
 		overlayHTML: (function(){
-			
-			var pathToImages = '../../Assets/MooEditable/Smiley/';
+			var settings = MooEditable.Actions.Settings.smiley;
 			var html = '';
-			var smileys = ['angryface', 'blush', 'gasp', 'grin', 'halo', 'lipsaresealed', 'smile', 'undecided', 'wink'];
-						
-			$each(smileys, function(sm){
-				html+= '<img src="'+ pathToImages + sm +'.png" style="padding:1px 2px;"></img>'; 
-			},self);
-	           
+			settings.smileys.each(function(s){
+				html += '<img src="'+ settings.imagesPath + s + settings.fileExt + '" class="smiley-image">'; 
+			});
 			return html;
 		})()
 	},
@@ -48,10 +49,26 @@ MooEditable.Actions.smiley = {
 		var el = e.target;
 		if (el.tagName.toLowerCase() != 'img') return;
 		var src = $(el).get('src');
-		
-		var fragment =  '<img style="border:0 none;" CONTENTEDITABLE = "false" src="'+src+'"></img>';
-		this.selection.insertContent(fragment);
-		
+		var content = '<img style="border:0;" class="smiley" src="' + src + '">';
+		this.selection.insertContent(content);
 		this.focus();
+	},
+	events: {
+		attach: function(editor){
+			if (Browser.Engine.trident){
+				// addListener instead of addEvent, because controlselect is a native event in IE
+				editor.doc.addListener('controlselect', function(e){
+					var el = e.target;
+					if (el.tagName.toLowerCase() != 'img') return;
+					if (!$(el).hasClass('smiley')) return;
+					e.preventDefault();
+				});
+			}
+		},
+		editorMouseDown: function(e, editor){
+			var el = e.target;
+			var isSmiley = (el.tagName.toLowerCase() == 'img') && $(el).hasClass('smiley');
+			editor.doc.execCommand('enableObjectResizing', false, !isSmiley);
+		}
 	}
 };

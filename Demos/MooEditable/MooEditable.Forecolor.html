@@ -26,7 +26,7 @@
 		<script type="text/javascript" src="../../Source/MooEditable/MooEditable.Forecolor.js"></script>
 	
 		<script type="text/javascript">
-			window.addEvent('load', function(){
+			window.addEvent('domready', function(){
 				var mooeditable = $('textarea-1').mooEditable({
 					actions: 'bold italic underline strikethrough | forecolor | toggleview'
 				});
@@ -44,7 +44,7 @@
 
 		<h1>MooEditable example with an example Button Overlay</h1>
 
-		<form id="theForm" method="post" action="http://xrado.hopto.org/post.php">
+		<form id="theForm" method="post" action="http://form-data.appspot.com/">
 
 			<label for="textarea-1">Textarea 1</label>
 			<textarea id="textarea-1" name="editable1">
