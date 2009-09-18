@@ -204,7 +204,8 @@ var MooEditable = new Class({
 			dbllick: this.editorDoubleClick.bind(this),
 			keypress: this.editorKeyPress.bind(this),
 			keyup: this.editorKeyUp.bind(this),
-			keydown: this.editorKeyDown.bind(this)
+			keydown: this.editorKeyDown.bind(this),
+			blur: this.editorBlur.bind(this)
 		});
 		this.textarea.addEvent('keypress', this.textarea.retrieve('mooeditable:textareaKeyListener', this.keyListener.bind(this)));
 		
@@ -367,6 +368,10 @@ var MooEditable = new Class({
 		}
 		
 		this.fireEvent('editorKeyDown', [e, this]);
+	},
+	
+	editorBlur: function(e){
+		if (this.cleanup(this.doc.body.innerHTML) != this.textarea.value) this.textarea.fireEvent('change');
 	},
 	
 	keyListener: function(e){
