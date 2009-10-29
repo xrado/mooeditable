@@ -1097,17 +1097,17 @@ MooEditable.Actions = new Hash({
 					var s = this.textarea.get('value')
 					.replace(/<strong([^>]*)>/gi, '<b$1>')
 					.replace(/<\/strong>/gi, '</b>')
-                	this.textarea.set('value',s);
-                }
+					this.textarea.set('value',s);
+				}
 			},
 			attach: function(){
 				if(Browser.Engine.gecko){
 					var s = this.textarea.get('value')
 					.replace(/<strong([^>]*)>/gi, '<b$1>')
 					.replace(/<\/strong>/gi, '</b>')
-                	this.textarea.set('value',s);
-                	this.setContent(s);
-                }
+					this.textarea.set('value',s);
+					this.setContent(s);
+				}
 			}
 		}
 	},
@@ -1129,8 +1129,8 @@ MooEditable.Actions = new Hash({
 					.replace(/<em([^>]*)>/gi, '<i$1>')
 					.replace(/<tmpembed([^>]*)>/gi, '<embed$1>')
 					.replace(/<\/em>/gi, '</i>');            	
-                	this.textarea.set('value',s);
-                }
+					this.textarea.set('value',s);
+				}
 			},
 			attach: function(){
 				if(Browser.Engine.gecko){
@@ -1139,9 +1139,9 @@ MooEditable.Actions = new Hash({
 					.replace(/<em([^>]*)>/gi, '<i$1>')
 					.replace(/<tmpembed([^>]*)>/gi, '<embed$1>')
 					.replace(/<\/em>/gi, '</i>');            	
-                	this.textarea.set('value',s);
-                	this.setContent(s);
-                }
+					this.textarea.set('value',s);
+					this.setContent(s);
+				}
 			}
 		}
 	},
