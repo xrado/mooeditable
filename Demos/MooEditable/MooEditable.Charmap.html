@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>MooEditable example with extra toolbar items</title>
+		<title>MooEditable charmap example</title>
 
 		<style type="text/css">
 			body{
@@ -10,7 +10,7 @@
 				font-size: .9em;
 			}
 			#textarea-1{
-				width: 720px;
+				width: 700px;
 				height: 200px;
 				padding: 10px;
 				border: 2px solid #ddd;
@@ -18,16 +18,16 @@
 		</style>
 
 		<link rel="stylesheet" type="text/css" href="../../Assets/MooEditable/MooEditable.css">
-		<link rel="stylesheet" type="text/css" href="../../Assets/MooEditable/MooEditable.Extras.css">
+		<link rel="stylesheet" type="text/css" href="../../Assets/MooEditable/MooEditable.Charmap.css">
 		<script type="text/javascript" src="../assets/mootools.js"></script>
 		<script type="text/javascript" src="../../Source/MooEditable/MooEditable.js"></script>
-		<script type="text/javascript" src="../../Source/MooEditable/MooEditable.UI.MenuList.js"></script>
-		<script type="text/javascript" src="../../Source/MooEditable/MooEditable.Extras.js"></script>
+		<script type="text/javascript" src="../../Source/MooEditable/MooEditable.Charmap.js"></script>
 
 		<script type="text/javascript">
 			window.addEvent('domready', function(){
-				$('textarea-1').mooEditable({
-					actions: 'bold italic underline strikethrough | formatBlock justifyleft justifyright justifycenter justifyfull | insertunorderedlist insertorderedlist indent outdent insertHorizontalRule | undo redo removeformat | createlink unlink | urlimage | toggleview'
+				var mooeditable = $('textarea-1').mooEditable({
+					actions: 'bold italic underline strikethrough | charmap | toggleview',
+					externalCSS: '../../Assets/MooEditable/Editable.css'
 				});
 
 				// Post submit
@@ -41,7 +41,7 @@
 	</head>
 	<body>
 
-		<h1>MooEditable example with extra toolbar items</h1>
+		<h1>MooEditable charmap example</h1>
 
 		<form id="theForm" method="post" action="http://form-data.appspot.com/">
 
