@@ -9,17 +9,27 @@ license: MIT-style license
 
 authors:
 - Radovan Lozej
-<<<<<<< HEAD:Source/MooEditable/MooEditable.Table.js
-=======
 - Ryan Mitchell
->>>>>>> cheeaun/master:Source/MooEditable/MooEditable.Table.js
 
 requires:
-- /MooEditable
-- /MooEditable.UI
-- /MooEditable.Actions
+# - MooEditable
+# - MooEditable.UI
+# - MooEditable.Actions
 
-provides: [MooEditable.UI.TableDialog]
+provides:
+- MooEditable.UI.TableDialog
+- MooEditable.Actions.tableadd
+- MooEditable.Actions.tableedit
+- MooEditable.Actions.tablerowadd
+- MooEditable.Actions.tablerowedit
+- MooEditable.Actions.tablerowspan
+- MooEditable.Actions.tablerowsplit
+- MooEditable.Actions.tablerowdelete
+- MooEditable.Actions.tablecoladd
+- MooEditable.Actions.tablecoledit
+- MooEditable.Actions.tablecolspan
+- MooEditable.Actions.tablecolsplit
+- MooEditable.Actions.tablecoldelete
 
 usage: |
   Add the following tags in your html

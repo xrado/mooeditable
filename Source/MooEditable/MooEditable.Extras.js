@@ -12,9 +12,18 @@ authors:
 - Ryan Mitchell
 
 requires:
-- /MooEditable
-- /MooEditable.UI
-- /MooEditable.UI.MenuList
+# - MooEditable
+# - MooEditable.UI
+# - MooEditable.UI.MenuList
+
+provides: 
+- MooEditable.Actions.formatBlock
+- MooEditable.Actions.justifyleft
+- MooEditable.Actions.justifyright
+- MooEditable.Actions.justifycenter
+- MooEditable.Actions.justifyfull
+- MooEditable.Actions.removeformat
+- MooEditable.Actions.insertHorizontalRule
 
 provides:
 

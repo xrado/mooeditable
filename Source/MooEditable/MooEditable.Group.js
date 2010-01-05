@@ -11,10 +11,9 @@ authors:
 - Ryan Mitchell
 
 requires:
-- core:1.2.4/Options
-- /MooEditable
-- /MooEditable.UI
-- /MooEditable.Actions
+# - MooEditable
+# - MooEditable.UI
+# - MooEditable.Actions
 
 provides: [MooEditable.Group]
 
